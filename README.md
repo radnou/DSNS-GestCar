@@ -57,6 +57,7 @@ voitureElectrique.afficherInfo();
 
 
 ```bash 
+cd demo/
 mvn compile
 mvn exec:java -Dexec.mainClass="com.rmoss.getscar.App"
 ```
