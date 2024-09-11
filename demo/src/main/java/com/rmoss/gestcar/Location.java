@@ -63,14 +63,20 @@ public class Location {
     /**
      * Afficher les détails de la location.
      */
+
     public void afficherDetailsLocation() {
         long nombreJours = java.time.temporal.ChronoUnit.DAYS.between(dateDebut, dateFin);
-        System.out.println("Location:");
-        System.out.println("Client: " + client.getNom());
-        System.out.println("Voiture: " + voiture.getMarque() + " " + voiture.getModele());
-        System.out.println("Date de début: " + dateDebut);
-        System.out.println("Date de fin: " + dateFin);
+
+        System.out.println("\n+----------------------------+");
+        System.out.println("| Détails de la Location      |");
+        System.out.println("+----------------------------+");
+        System.out.println("Client : " + client.getNom());
+        System.out.println("Voiture : " + voiture.getMarque() + " " + voiture.getModele());
+        System.out.println("Date de début : " + dateDebut);
+        System.out.println("Date de fin : " + dateFin);
         System.out.println("Nombre de jours de location: " + nombreJours);
-        System.out.println("Coût total: " + calculerCoutTotal() + " €");
+        System.out.println("Coût total : " + calculerCoutTotal() + " €");
+        System.out.println("+----------------------------+\n");
     }
+    
 }

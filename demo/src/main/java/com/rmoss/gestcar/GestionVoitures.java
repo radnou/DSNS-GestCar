@@ -1,15 +1,37 @@
 package com.rmoss.gestcar;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class GestionVoitures {
     private ArrayList<Voiture> voitures;
     private ArrayList<Location> locations;
+    private ArrayList<Client> clients; // Ajout de la gestion des clients
 
     public GestionVoitures() {
         this.voitures = new ArrayList<>();
         this.locations = new ArrayList<>();
+        this.clients = new ArrayList<>(); // Initialisation de la liste des clients
+    }
+
+    // Ajouter un client à la liste
+    public void ajouterClient(Client client) {
+        clients.add(client);
+    }
+
+    // Afficher tous les clients
+    public void afficherClients() {
+        if (clients.isEmpty()) {
+            System.out.println("Aucun client enregistré.");
+        } else {
+            System.out.println("Liste des clients :");
+            for (int i = 0; i < clients.size(); i++) {
+                Client client = clients.get(i);
+                System.out.println((i + 1) + ". " + client.getNom() + " (" + client.getTelephone() + ")");
+            }
+        }
     }
 
     // Ajouter une voiture à la liste
@@ -34,13 +56,21 @@ public class GestionVoitures {
         return null; // Si aucune voiture n'est trouvée
     }
 
-    // Afficher toutes les voitures disponibles
     public void afficherVoituresDisponibles() {
+        System.out.println("\n+----------------------------+");
+        System.out.println("| Voitures disponibles        |");
+        System.out.println("+----------------------------+");
+        boolean aDesVoitures = false;
         for (Voiture voiture : voitures) {
             if (voiture.isDisponible()) {
                 voiture.afficherInfo();
+                aDesVoitures = true;
             }
         }
+        if (!aDesVoitures) {
+            System.out.println("Aucune voiture n'est disponible.");
+        }
+        System.out.println("+----------------------------+\n");
     }
 
     // Vérifier si une voiture fait partie du parc géré
@@ -72,5 +102,40 @@ public class GestionVoitures {
         for (Location location : locations) {
             location.afficherDetailsLocation();
         }
+    }
+
+    public void ajouterClientDepuisConsole() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("\n+----------------------------+");
+        System.out.println("| Ajouter un nouveau client   |");
+        System.out.println("+----------------------------+");
+
+        System.out.print("Entrez le nom du client : ");
+        String nom = scanner.nextLine();
+
+        System.out.print("Entrez l'adresse du client : ");
+        String adresse = scanner.nextLine();
+
+        System.out.print("Entrez le numéro de téléphone du client : ");
+        String telephone = scanner.next();
+
+        Client client = new Client(nom, adresse, telephone);
+        ajouterClient(client);
+
+        System.out.println("Client ajouté avec succès : " + nom + "\n");
+    }
+
+    public LocalDate saisirDateDepuisConsole(String message) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(message);
+        String dateStr = scanner.nextLine();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        scanner.close();
+        return LocalDate.parse(dateStr, formatter);
+    }
+
+    public ArrayList<Client> getClients() {
+        return this.clients;
     }
 }
