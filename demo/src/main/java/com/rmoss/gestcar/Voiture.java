@@ -1,17 +1,24 @@
 package com.rmoss.gestcar;
 
-public class Voiture {
 
-    private String marque;
-    private String modele;
-    private Integer annee;
-    private Double prixParJour;
+/**
+ * Classe abstraite représentant une voiture.
+ * Ne peut pas être instanciée directement, doit être étendue par des sous-classes spécifiques.
+ */
+public abstract class Voiture {
+
+    protected String marque;
+    protected String modele;
+    protected Integer annee;
+    protected Double prixParJour;
+    protected boolean estDisponible;
 
     public Voiture(String marque, String modele, Integer annee, Double prixParJour) {
         this.marque = marque;
         this.annee = annee;
         this.modele = modele;
         this.prixParJour = prixParJour;
+        this.estDisponible = true; // Par défaut, une voiture est disponible
     }
 
     public String getMarque() {
@@ -46,8 +53,21 @@ public class Voiture {
         this.prixParJour = prixParJour;
     }
 
-      // Afficher les informations de la voiture
-      public void afficherInfo() {
-        System.out.println("Voiture : " + marque + " " + modele + " (" + annee + "), Prix par jour : " + prixParJour);
-    }
+        // Getters et setters
+        public boolean isDisponible() {
+            return estDisponible;
+        }
+    
+        public void setDisponible(boolean estDisponible) {
+            this.estDisponible = estDisponible;
+        }
+ /**
+     * Méthode abstraite à implémenter par les sous-classes pour afficher les détails spécifiques.
+     */
+    public abstract void afficherInfo();
+
+    /**
+     * Méthode abstraite à implémenter par les sous-classes pour calculer la consommation.
+     */
+    public abstract double calculerConsommation();
 }
