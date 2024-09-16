@@ -128,10 +128,8 @@ public class GestionVoitures {
 
     public LocalDate saisirDateDepuisConsole(String message) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print(message);
         String dateStr = scanner.nextLine();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        scanner.close();
         return LocalDate.parse(dateStr, formatter);
     }
 
