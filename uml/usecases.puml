@@ -1,0 +1,14 @@
+@startuml
+actor Utilisateur
+
+usecase "Ajouter une Voiture" as UC1
+usecase "Ajouter un Client" as UC2
+usecase "Effectuer une Location" as UC3
+usecase "Afficher l'Historique des Locations" as UC4
+
+Utilisateur --> UC1
+Utilisateur --> UC2
+Utilisateur --> UC3
+Utilisateur --> UC4
+
+@enduml

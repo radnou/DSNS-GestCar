@@ -1,0 +1,21 @@
+@startuml
+actor Client
+Client -> "VoitureView" : Sélectionner une voiture
+Client -> "LocationView" : Choisir les dates
+
+"LocationView" -> "VoitureController" : Vérifier la disponibilité de la voiture
+"VoitureController" -> "VoitureDAO" : Récupérer les informations sur la voiture
+"VoitureDAO" --> "VoitureController" : Renvoie disponibilité
+
+alt Voiture disponible
+    "VoitureController" -> "LocationController" : Créer une nouvelle location
+    "LocationController" -> "LocationDAO" : Ajouter la location en base de données
+    "LocationDAO" --> "LocationController" : Confirmation
+    "LocationController" --> "VoitureView" : Afficher confirmation de la location
+    "VoitureView" --> Client : Confirmer la location effectuée
+else Voiture indisponible
+    "VoitureController" --> "VoitureView" : Afficher message de non-disponibilité
+    "VoitureView" --> Client : Voiture indisponible
+end
+
+@enduml
