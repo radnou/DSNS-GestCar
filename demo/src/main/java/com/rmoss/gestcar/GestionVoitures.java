@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GestionVoitures {
-    private ArrayList<Voiture> voitures;
-    private ArrayList<Location> locations;
-    private ArrayList<Client> clients; // Ajout de la gestion des clients
+    private final ArrayList<Voiture> voitures;
+    private final ArrayList<Location> locations;
+    private final ArrayList<Client> clients; // Ajout de la gestion des clients
 
     public GestionVoitures() {
         this.voitures = new ArrayList<>();
