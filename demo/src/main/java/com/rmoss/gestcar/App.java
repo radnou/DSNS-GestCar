@@ -42,6 +42,6 @@ public class App {
         thermiqueController.afficherVoitureThermique(1);
 
         // Afficher les détails d'une voiture électrique
-        electriqueController.afficherVoitureElectrique(2);
+        electriqueController.afficherVoitureElectrique(1);
     }
 }

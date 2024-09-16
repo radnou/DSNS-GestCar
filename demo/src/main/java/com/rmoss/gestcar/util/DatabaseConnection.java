@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnection {
-    private static final String URL = "jdbc:sqlite:data/voitures.db";  // Spécifiez ici l'URL de votre fichier SQLite
+    private static final String URL = "jdbc:sqlite:demo/src/main/java/com/rmoss/gestcar/data/voitures.db";  // Spécifiez ici l'URL de votre fichier SQLite
     private static Connection connection = null;
 
     // Méthode pour établir la connexion
