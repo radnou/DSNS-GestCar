@@ -1,5 +1,11 @@
 package com.rmoss.gestcar.controller;
 
+import com.rmoss.gestcar.dao.VoitureThermiqueDAO;
+import com.rmoss.gestcar.model.VoitureThermique;
+import com.rmoss.gestcar.view.VoitureView;
+
+import java.sql.SQLException;
+
 public class VoitureThermiqueController {
     private final VoitureThermiqueDAO voitureThermiqueDAO;
     private final VoitureView vue;
@@ -22,7 +28,7 @@ public class VoitureThermiqueController {
         try {
             VoitureThermique voiture = voitureThermiqueDAO.obtenirVoitureThermiqueParId(id);
             if (voiture != null) {
-                vue.afficherDetailsVoiture(voiture.getMarque(), voiture.getModele(), voiture.getAnnee(), voiture.getConsommationCarburant(), voiture.getPrixParJour());
+                vue.afficherDetailsVoiture(voiture.getMarque(), voiture.getModele(), voiture.getAnnee(), (int) voiture.getConsommationCarburant(), voiture.getPrixParJour());
             } else {
                 vue.afficherErreur("Voiture thermique non trouvée.");
             }

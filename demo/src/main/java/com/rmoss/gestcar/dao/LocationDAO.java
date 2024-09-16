@@ -1,10 +1,16 @@
 package com.rmoss.gestcar.dao;
 
+import com.rmoss.gestcar.model.Client;
+import com.rmoss.gestcar.model.Location;
+import com.rmoss.gestcar.model.Voiture;
+
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class LocationDAO {
     private final Connection connection;
@@ -34,10 +40,13 @@ public class LocationDAO {
             if (rs.next()) {
                 // Récupérer les informations de la location, Client et Voiture sont récupérés via leurs DAO respectifs
                 Client client = new ClientDAO(connection).obtenirClientParId(rs.getInt("clientId"));
-                Voiture voiture = new VoitureDAO(connection).obtenirVoitureThermiqueParId(rs.getInt("voitureId")); // Adapte pour électrique si nécessaire
+                Voiture voiture = new VoitureThermiqueDAO(connection).obtenirVoitureThermiqueParId(rs.getInt("voitureId")); // Adapte pour électrique si nécessaire
                 String dateDebut = rs.getString("dateDebut");
                 String dateFin = rs.getString("dateFin");
-                return new Location(client, voiture, dateDebut, dateFin);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                var dateDebutFormat = LocalDate.parse(dateDebut, formatter);
+                var dateFinFormat = LocalDate.parse(dateFin, formatter);
+                return new Location(voiture, client, dateDebutFormat, dateFinFormat);
             }
         }
         return null;

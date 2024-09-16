@@ -1,4 +1,4 @@
-package com.rmoss.gestcar;
+package com.rmoss.gestcar.model;
 
 public class VoitureElectrique extends Voiture {
     private int autonomieBatterie; // en kilomètres
@@ -32,7 +32,7 @@ public class VoitureElectrique extends Voiture {
      */
     @Override
     public double calculerConsommation() {
-        return autonomieBatterie / 100.0; // Par exemple, une formule simplifiée pour calculer la consommation
+        return autonomieBatterie / 100.0; // formule simplifiée pour calculer la consommation
     }
 
 }

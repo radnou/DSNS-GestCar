@@ -5,21 +5,19 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnection {
-    private static final String URL = "jdbc:sqlite:voitures.db";  // URL de la base de données SQLite
+    private static final String URL = "jdbc:sqlite:data/voitures.db";  // Spécifiez ici l'URL de votre fichier SQLite
     private static Connection connection = null;
 
     // Méthode pour établir la connexion
     public static Connection connect() {
         try {
             if (connection == null || connection.isClosed()) {
-                // Charger le driver JDBC pour SQLite
-                Class.forName("org.sqlite.JDBC");
-                // Établir la connexion à la base de données
-                connection = DriverManager.getConnection(URL);
+                Class.forName("org.sqlite.JDBC");  // Charger le driver JDBC pour SQLite
+                connection = DriverManager.getConnection(URL);  // Établir la connexion
                 System.out.println("Connexion à la base de données SQLite établie.");
             }
         } catch (SQLException | ClassNotFoundException e) {
-            System.out.println("Erreur de connexion à la base de données : " + e.getMessage());
+            System.err.println("Erreur lors de la connexion à la base de données : " + e.getMessage());
         }
         return connection;
     }
@@ -31,7 +29,7 @@ public class DatabaseConnection {
                 connection.close();
                 System.out.println("Connexion fermée.");
             } catch (SQLException e) {
-                System.out.println("Erreur lors de la fermeture de la connexion : " + e.getMessage());
+                System.err.println("Erreur lors de la fermeture de la connexion : " + e.getMessage());
             }
         }
     }

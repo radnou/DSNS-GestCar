@@ -1,4 +1,4 @@
-package com.rmoss.gestcar;
+package com.rmoss.gestcar.model;
 
 
 /**
@@ -6,7 +6,7 @@ package com.rmoss.gestcar;
  * Ne peut pas être instanciée directement, doit être étendue par des sous-classes spécifiques.
  */
 public abstract class Voiture {
-
+    protected int Id;
     protected String marque;
     protected String modele;
     protected Integer annee;
@@ -19,6 +19,14 @@ public abstract class Voiture {
         this.modele = modele;
         this.prixParJour = prixParJour;
         this.estDisponible = true; // Par défaut, une voiture est disponible
+    }
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
     }
 
     public String getMarque() {
@@ -53,15 +61,16 @@ public abstract class Voiture {
         this.prixParJour = prixParJour;
     }
 
-        // Getters et setters
-        public boolean isDisponible() {
-            return estDisponible;
-        }
-    
-        public void setDisponible(boolean estDisponible) {
-            this.estDisponible = estDisponible;
-        }
- /**
+    // Getters et setters
+    public boolean isDisponible() {
+        return estDisponible;
+    }
+
+    public void setDisponible(boolean estDisponible) {
+        this.estDisponible = estDisponible;
+    }
+
+    /**
      * Méthode abstraite à implémenter par les sous-classes pour afficher les détails spécifiques.
      */
     public abstract void afficherInfo();

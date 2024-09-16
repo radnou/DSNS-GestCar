@@ -1,4 +1,4 @@
-package com.rmoss.gestcar;
+package com.rmoss.gestcar.model;
 
 /**
  * Classe représentant une voiture thermique, étendant la classe abstraite

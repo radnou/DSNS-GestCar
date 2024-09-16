@@ -1,4 +1,4 @@
-package com.rmoss.gestcar;
+package com.rmoss.gestcar.model;
 
 import java.time.LocalDate;
 

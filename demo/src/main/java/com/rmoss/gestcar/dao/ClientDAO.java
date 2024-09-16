@@ -1,5 +1,7 @@
 package com.rmoss.gestcar.dao;
 
+import com.rmoss.gestcar.model.Client;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

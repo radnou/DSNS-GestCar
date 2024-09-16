@@ -1,5 +1,9 @@
 package com.rmoss.gestcar;
 
+import com.rmoss.gestcar.model.Client;
+import com.rmoss.gestcar.model.Location;
+import com.rmoss.gestcar.model.Voiture;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;

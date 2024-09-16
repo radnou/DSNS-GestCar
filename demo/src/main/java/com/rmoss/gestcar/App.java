@@ -1,57 +1,47 @@
 package com.rmoss.gestcar;
 
-import java.time.LocalDate;
+import com.rmoss.gestcar.controller.VoitureElectriqueController;
+import com.rmoss.gestcar.controller.VoitureThermiqueController;
+import com.rmoss.gestcar.dao.VoitureElectriqueDAO;
+import com.rmoss.gestcar.dao.VoitureThermiqueDAO;
+import com.rmoss.gestcar.model.VoitureElectrique;
+import com.rmoss.gestcar.model.VoitureThermique;
+import com.rmoss.gestcar.util.DatabaseConnection;
+import com.rmoss.gestcar.util.DatabaseSchema;
+import com.rmoss.gestcar.view.VoitureView;
+
+import java.sql.Connection;
 
 /**
  * Hello world!
  */
 public class App {
     public static void main(String[] args) {
-        System.out.println("Application de Gestion de Véhicules");
-        // Création d'une instance de gestion des voitures
-        GestionVoitures gestionVoitures = new GestionVoitures();
+        // Connexion à la base de données
+        Connection connection = DatabaseConnection.connect();
+        DatabaseSchema.init(connection);
 
-        // Ajout de deux voitures
-        VoitureThermique voitureToyota = new VoitureThermique("Toyota", "Corolla", 2020, 6, 5);
-        VoitureThermique voitureHonda = new VoitureThermique("Honda", "Civic", 2019, 54, 4.5);
-        VoitureElectrique voitureElectrique = new VoitureElectrique("Tesla", "Model S", 2022, 120.0, 450);
-        Voiture renaultMegane = new VoitureThermique("Renault", "Megane", 2018, 40.0, 99.9);
+        // Initialiser les DAO et la Vue
+        VoitureThermiqueDAO voitureThermiqueDAO = new VoitureThermiqueDAO(connection);
+        VoitureElectriqueDAO voitureElectriqueDAO = new VoitureElectriqueDAO(connection);
+        VoitureView vue = new VoitureView();
 
-        gestionVoitures.ajouterVoiture(voitureToyota);
-        gestionVoitures.ajouterVoiture(voitureHonda);
-        gestionVoitures.ajouterVoiture(voitureElectrique);
-        gestionVoitures.ajouterVoiture(renaultMegane);
+        // Créer les contrôleurs
+        VoitureThermiqueController thermiqueController = new VoitureThermiqueController(voitureThermiqueDAO, vue);
+        VoitureElectriqueController electriqueController = new VoitureElectriqueController(voitureElectriqueDAO, vue);
 
-        // Afficher toutes les voitures
-        System.out.println("Liste des voitures disponibles :");
-        gestionVoitures.afficherVoitures();
+        // Ajouter une voiture thermique
+        VoitureThermique voitureThermique = new VoitureThermique("Peugeot", "208", 2021, 15.0, 60.0);
+        thermiqueController.ajouterVoitureThermique(voitureThermique);
 
-        // Création d'un client
-        Client client = new Client("Emmanuel Macron", "123 Rue des Fleurs", "0123456789");
+        // Ajouter une voiture électrique
+        VoitureElectrique voitureElectrique = new VoitureElectrique("Tesla", "Model S", 2022, 500.0, 120);
+        electriqueController.ajouterVoitureElectrique(voitureElectrique);
 
-        // Louer une voiture thermique
-        gestionVoitures.louerVoiture(renaultMegane, client, LocalDate.now(), LocalDate.now().plusDays(3));
+        // Afficher les détails d'une voiture thermique
+        thermiqueController.afficherVoitureThermique(1);
 
-        // Afficher les voitures disponibles après location
-        System.out.println("\nVoitures disponibles après location:");
-        gestionVoitures.afficherVoituresDisponibles();
-
-        // Afficher l'historique des locations
-        System.out.println("\nHistorique des locations:");
-        gestionVoitures.afficherHistoriqueLocations();
-        // Ajouter un client depuis la console
-//        gestionVoitures.ajouterClientDepuisConsole();
-//
-//        // Louer une voiture depuis la console
-//        Client client2 = gestionVoitures.getClients().get(0); // Sélection du premier client pour simplifier
-//
-//        // Ajouter et afficher des voitures comme avant, puis louer depuis la console
-//        VoitureThermique voiture = new VoitureThermique("Renault", "Clio", 2020, 50.0, 6.2);
-//        gestionVoitures.ajouterVoiture(voiture);
-//
-//        LocalDate dateDebut = gestionVoitures.saisirDateDepuisConsole("Entrez la date de début (yyyy-MM-dd) : ");
-//        LocalDate dateFin = gestionVoitures.saisirDateDepuisConsole("Entrez la date de fin (yyyy-MM-dd) : ");
-//
-//        gestionVoitures.louerVoiture(voiture, client, dateDebut, dateFin);
+        // Afficher les détails d'une voiture électrique
+        electriqueController.afficherVoitureElectrique(2);
     }
 }

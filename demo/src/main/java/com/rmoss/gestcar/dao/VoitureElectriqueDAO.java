@@ -1,5 +1,7 @@
 package com.rmoss.gestcar.dao;
 
+import com.rmoss.gestcar.model.VoitureElectrique;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,7 +21,7 @@ public class VoitureElectriqueDAO {
             stmt.setString(1, voitureElectrique.getMarque());
             stmt.setString(2, voitureElectrique.getModele());
             stmt.setInt(3, voitureElectrique.getAnnee());
-            stmt.setString(4, voitureElectrique.getAutonomieBatterie());
+            stmt.setInt(4, voitureElectrique.getAutonomieBatterie());
             stmt.setDouble(5, voitureElectrique.getPrixParJour());
             stmt.executeUpdate();
         }
@@ -35,7 +37,7 @@ public class VoitureElectriqueDAO {
                 String marque = rs.getString("marque");
                 String modele = rs.getString("modele");
                 int annee = rs.getInt("annee");
-                String autonomieBatterie = rs.getString("autonomieBatterie");
+                int autonomieBatterie = rs.getInt("autonomieBatterie");
                 double prixParJour = rs.getDouble("prixParJour");
                 return new VoitureElectrique(marque, modele, annee, prixParJour, autonomieBatterie);
             }
@@ -50,7 +52,7 @@ public class VoitureElectriqueDAO {
             stmt.setString(1, voitureElectrique.getMarque());
             stmt.setString(2, voitureElectrique.getModele());
             stmt.setInt(3, voitureElectrique.getAnnee());
-            stmt.setString(4, voitureElectrique.getAutonomieBatterie());
+            stmt.setInt(4, voitureElectrique.getAutonomieBatterie());
             stmt.setDouble(5, voitureElectrique.getPrixParJour());
             stmt.setInt(6, voitureElectrique.getId()); // ID de la voiture électrique
             stmt.executeUpdate();

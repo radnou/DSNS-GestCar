@@ -1,9 +1,10 @@
-package com.rmoss.gestcar;
+package com.rmoss.gestcar.model;
 
 /**
  * Classe représentant un client.
  */
 public class Client {
+    private int id;
     private String nom;
     private String adresse;
     private String telephone;
@@ -12,6 +13,14 @@ public class Client {
         this.nom = nom;
         this.adresse = adresse;
         this.telephone = telephone;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNom() {
