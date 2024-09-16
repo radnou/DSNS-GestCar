@@ -39,7 +39,7 @@ public class App {
         // Afficher l'historique des locations
         System.out.println("\nHistorique des locations:");
         gestionVoitures.afficherHistoriqueLocations();
-//        // Ajouter un client depuis la console
+        // Ajouter un client depuis la console
 //        gestionVoitures.ajouterClientDepuisConsole();
 //
 //        // Louer une voiture depuis la console
