@@ -1,0 +1,43 @@
+@startuml
+class Voiture {
+-model  : String
+-annee  : String
++getModel():    String
++getAnnee():    String
+}
+
+class VoitureElectrique {
+-autonomieBatterie  : String
++getAutonomieBatterie():    String
++setAutonomieBatterie():    void
++getAnnee():    String
+}
+
+
+class VoitureThermique {
+-consommationCarburant  : double
++getConsommationCarburant():    double
++setConsommationCarburant()
+}
+
+Voiture <|-- VoitureElectrique
+Voiture <|-- VoitureThermique
+
+class Client {
+-nom:   String
+-adresse:   String
+-telephone: String
+}
+
+class Location {
+-voiture: Voiture
+-client: Client
+-dateDebut: Date
+-dateFin: Date
++String afficherDetailsLocation()
++calculerCoutLocation()
+}
+Client "0..*" --> "1" Location : effectue
+Voiture "0..*" --> "1" Location : est louée dans
+
+@enduml
