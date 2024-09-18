@@ -17,13 +17,14 @@ public class VoitureElectriqueDAO {
     // Méthode pour ajouter une voiture électrique à la base de données
     public void ajouterVoitureElectrique(VoitureElectrique voitureElectrique) throws SQLException {
         String query = "INSERT INTO voituresElectrique (marque, modele, annee, autonomieBatterie, prixParJour) VALUES (?, ?, ?, ?, ?)";
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+        try (PreparedStatement stmt = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, voitureElectrique.getMarque());
             stmt.setString(2, voitureElectrique.getModele());
             stmt.setInt(3, voitureElectrique.getAnnee());
             stmt.setInt(4, voitureElectrique.getAutonomieBatterie());
             stmt.setDouble(5, voitureElectrique.getPrixParJour());
             stmt.executeUpdate();
+            voitureElectrique.setId(stmt.getGeneratedKeys().getInt(1) );
         }
     }
 

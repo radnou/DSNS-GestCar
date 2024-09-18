@@ -9,7 +9,8 @@ public class Client {
     private String adresse;
     private String telephone;
 
-    public Client(String nom, String adresse, String telephone) {
+    public Client(int id ,String nom, String adresse, String telephone) {
+        this.id = id;
         this.nom = nom;
         this.adresse = adresse;
         this.telephone = telephone;
@@ -27,11 +28,26 @@ public class Client {
         return nom;
     }
 
+    public Client setNom(String nom) {
+        this.nom = nom;
+        return this;
+    }
+
     public String getAdresse() {
         return adresse;
     }
 
+    public Client setAdresse(String adresse) {
+        this.adresse = adresse;
+        return this;
+    }
+
     public String getTelephone() {
         return telephone;
+    }
+
+    public Client setTelephone(String telephone) {
+        this.telephone = telephone;
+        return this;
     }
 }

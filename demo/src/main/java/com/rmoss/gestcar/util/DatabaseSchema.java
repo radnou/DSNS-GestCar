@@ -3,10 +3,45 @@ package com.rmoss.gestcar.util;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
 
 public class DatabaseSchema {
+
+    public static void reset (Connection connection) throws SQLException {
+          try (Statement stmt = connection.createStatement()) {
+
+              //Drop Tables
+              var requeteDropTablelocations = "DROP TABLE IF exists locations";
+
+              var requeteDropTableclients = "DROP TABLE IF exists clients";
+
+             // var requeteDropTablesqlite_master = "DROP TABLE if exists sqlite_master";
+
+              //var requeteDropTablesqlite_sequence = "DROP TABLE if exists sqlite_sequence";
+
+              var requeteDropTablevoituresElectrique = "DROP TABLE if exists voituresElectrique";
+
+              var requeteDropTablevoituresThermique = "DROP TABLE if exists voituresThermique";
+
+              // Reset des tables
+              stmt.addBatch(requeteDropTablelocations);
+              //stmt.addBatch(requeteDropTablesqlite_master);
+              //stmt.addBatch(requeteDropTablesqlite_sequence);
+              stmt.addBatch(requeteDropTablevoituresElectrique);
+              stmt.addBatch(requeteDropTablevoituresThermique);
+              stmt.addBatch(requeteDropTableclients);
+
+              var resultatBatchExecution = stmt.executeBatch();
+              System.out.println(Arrays.toString(resultatBatchExecution));
+          } catch (SQLException e) {
+              System.err.println(e.getMessage());
+              throw new SQLException(e);
+          }
+    }
+
     public static void init(Connection connection) {
         try (Statement stmt = connection.createStatement()) {
+
             // Création de la table VoituresThermique
             String createVoituresThermiqueTable = "CREATE TABLE IF NOT EXISTS voituresThermique (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +

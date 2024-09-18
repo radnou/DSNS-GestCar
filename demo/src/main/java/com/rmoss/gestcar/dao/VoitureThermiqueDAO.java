@@ -17,13 +17,14 @@ public class VoitureThermiqueDAO {
     // Méthode pour ajouter une voiture thermique à la base de données
     public void ajouterVoitureThermique(VoitureThermique voitureThermique) throws SQLException {
         String query = "INSERT INTO voituresThermique (marque, modele, annee, consommationCarburant, prixParJour) VALUES (?, ?, ?, ?, ?)";
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+        try (PreparedStatement stmt = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, voitureThermique.getMarque());
             stmt.setString(2, voitureThermique.getModele());
             stmt.setInt(3, voitureThermique.getAnnee());
             stmt.setDouble(4, voitureThermique.getConsommationCarburant());
             stmt.setDouble(5, voitureThermique.getPrixParJour());
             stmt.executeUpdate();
+            voitureThermique.setId(stmt.getGeneratedKeys().getInt(1));
         }
     }
 
